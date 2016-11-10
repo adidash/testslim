@@ -1,27 +1,84 @@
-# Slim Framework 3 Skeleton Application
-#testslim
+# Slim Framework
 
-Use this skeleton application to quickly setup and start working on a new Slim Framework 3 application. This application uses the latest Slim 3 with the PHP-View template renderer. It also uses the Monolog logger.
+[![Build Status](https://travis-ci.org/slimphp/Slim.svg?branch=develop)](https://travis-ci.org/slimphp/Slim)
+[![Coverage Status](https://coveralls.io/repos/slimphp/Slim/badge.svg)](https://coveralls.io/r/slimphp/Slim)
+[![Total Downloads](https://poser.pugx.org/slim/slim/downloads)](https://packagist.org/packages/slim/slim)
+[![License](https://poser.pugx.org/slim/slim/license)](https://packagist.org/packages/slim/slim)
 
-This skeleton application was built for Composer. This makes setting up a new Slim Framework application quick and easy.
+Slim is a PHP micro-framework that helps you quickly write simple yet powerful web applications and APIs.
 
-## Install the Application
+## Installation
 
-Run this command from the directory in which you want to install your new Slim Framework application.
+It's recommended that you use [Composer](https://getcomposer.org/) to install Slim.
 
-    php composer.phar create-project slim/slim-skeleton [my-app-name]
+```bash
+$ composer require slim/slim "^3.0"
+```
 
-Replace `[my-app-name]` with the desired directory name for your new application. You'll want to:
+This will install Slim and all required dependencies. Slim requires PHP 5.5.0 or newer.
 
-* Point your virtual host document root to your new application's `public/` directory.
-* Ensure `logs/` is web writeable.
+## Usage
 
-To run the application in development, you can also run this command. 
+Create an index.php file with the following contents:
 
-	php composer.phar start
+```php
+<?php
 
-Run this command to run the test suite
+require 'vendor/autoload.php';
 
-	php composer.phar test
+$app = new Slim\App();
 
-That's it! Now go build something cool.
+$app->get('/hello/{name}', function ($request, $response, $args) {
+    $response->write("Hello, " . $args['name']);
+    return $response;
+});
+
+$app->run();
+```
+
+You may quickly test this using the built-in PHP server:
+```bash
+$ php -S localhost:8000
+```
+
+Going to http://localhost:8000/hello/world will now display "Hello, world".
+
+For more information on how to configure your web server, see the [Documentation](http://www.slimframework.com/docs/start/web-servers.html).
+
+## Tests
+
+To execute the test suite, you'll need phpunit.
+
+```bash
+$ phpunit
+```
+
+## Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+
+## Learn More
+
+Learn more at these links:
+
+- [Website](http://www.slimframework.com)
+- [Documentation](http://www.slimframework.com/docs/start/installation.html)
+- [Support Forum](http://help.slimframework.com)
+- [Twitter](https://twitter.com/slimphp)
+- [Resources](https://github.com/xssc/awesome-slim)
+
+## Security
+
+If you discover security related issues, please email security@slimframework.com instead of using the issue tracker.
+
+## Credits
+
+- [Josh Lockhart](https://github.com/codeguy)
+- [Andrew Smith](https://github.com/silentworks)
+- [Rob Allen](https://github.com/akrabat)
+- [Gabriel Manricks](https://github.com/gmanricks)
+- [All Contributors](../../contributors)
+
+## License
+
+The Slim Framework is licensed under the MIT license. See [License File](LICENSE.md) for more information.
